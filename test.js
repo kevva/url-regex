@@ -4,7 +4,7 @@ var urlRegex = require('./');
 var test = require('ava');
 
 test('match URLs', function (t) {
-    t.plan(27);
+    t.plan(29);
 
     var fixtures = [
         'http://userid:password@example.com:8080',
@@ -32,7 +32,9 @@ test('match URLs', function (t) {
         'http://مثال.إختبار',
         'http://例子.测试',
         '//userid:password@example.com:8080',
-        '//google.com'
+        '//google.com',
+        'www.☺.com',
+        'www.goooooooooogle.com/yehiiiiiii'
     ];
 
     fixtures.forEach(function (el) {
@@ -43,7 +45,7 @@ test('match URLs', function (t) {
 });
 
 test('do not match URLs', function (t) {
-    t.plan(36);
+    t.plan(37);
 
     var fixtures = [
         'http://',
@@ -63,6 +65,7 @@ test('do not match URLs', function (t) {
         '///',
         'http:///a',
         'foo.com',
+        'asd.foo.com',
         'rdar://1234',
         'h://test',
         'http:// shouldfail.com',
