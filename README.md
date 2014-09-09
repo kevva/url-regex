@@ -2,6 +2,8 @@
 
 > Regular expression for matching URLs
 
+Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
+
 ## Install
 
 ```sh
@@ -25,4 +27,4 @@ urlRegex().exec('This is a cool site https://github.com')[0].trim();
 
 ## License
 
-MIT © [Kevin Mårtensson](http://kevinmartensson.com)
+MIT © [Diego Perini](https://gist.github.com/dperini)
