@@ -36,7 +36,7 @@ test('match URLs', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		t.assert(urlRegex().test(el));
+		t.assert(urlRegex().test(el), el);
 	});
 
 	t.assert(urlRegex().exec('asasdasd //google.com')[0].trim() === '//google.com');
@@ -79,7 +79,7 @@ test('do not match URLs', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		t.assert(!urlRegex().test(el));
+		t.assert(!urlRegex().test(el), el);
 	});
 
 	t.end();
