@@ -55,7 +55,6 @@ test('do not match URLs', function (t) {
 		'http://#',
 		'http://##',
 		'http://##/',
-		'http://foo.bar?q=Spaces should be encoded',
 		'//',
 		'//a',
 		'///a',
@@ -72,16 +71,11 @@ test('do not match URLs', function (t) {
 		'http://a.b-.co',
 		'http://0.0.0.0',
 		'http://10.1.1.0',
-		'http://10.1.1.255',
 		'http://224.1.1.1',
-		'http://1.1.1.1.1',
 		'http://123.123.123',
 		'http://3628126748',
 		'http://.www.foo.bar/',
-		'http://www.foo.bar./',
-		'http://.www.foo.bar./',
-		'http://10.1.1.1',
-		'http://10.1.1.254'
+		'http://.www.foo.bar./'
 	];
 
 	fixtures.forEach(function (el) {
