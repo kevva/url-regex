@@ -32,7 +32,9 @@ test('match URLs', function (t) {
 		'//userid:password@example.com:8080',
 		'//google.com',
 		'www.☺.com',
-		'www.goooooooooogle.com/yehiiiiiii'
+		'www.goooooooooogle.com/yehiiiiiii',
+		'http://127.0.0.1',
+		'"//google.com"'
 	];
 
 	fixtures.forEach(function (el) {
