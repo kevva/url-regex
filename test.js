@@ -1,7 +1,7 @@
 'use strict';
 
-var urlRegex = require('./');
 var test = require('ava');
+var urlRegex = require('./');
 
 test('match URLs', function (t) {
 	var fixtures = [
