@@ -6,11 +6,11 @@ var urlRegex = require('./');
 
 test('match URLs', function (t) {
 	var fixtures = tlds.map(function (tld) {
-		return 'http://google.' + tld;
+		return 'google.' + tld;
 	});
 
 	fixtures = fixtures.concat(tlds.map(function (tld) {
-		return '"http://google.' + tld + '"';
+		return '"google.' + tld + '"';
 	}));
 
 	fixtures = fixtures.concat([
