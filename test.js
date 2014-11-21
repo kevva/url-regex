@@ -83,7 +83,6 @@ test('do not match URLs', function (t) {
 		'///a',
 		'//a',
 		':// should fail',
-		'ftps://foo.bar/',
 		'h://test',
 		'http:// shouldfail.com',
 		'http://##',

@@ -14,7 +14,7 @@ module.exports = function () {
 	var host = '(?:xn--[a-z0-9\\-]{1,59}|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))';
 	var path = '(?:\/[^\\s]*)?';
 	var port = '(?::\\d{2,5})?';
-	var protocol = '(?:(?:(?:https?|ftp):)?\/\/)?';
+	var protocol = '(?:(?:(?:\\w)+:)?\/\/)?';
 	var tld = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|' + tlds + '+))';
 	var ips = [
 		'(?!10(?:\\.\\d{1,3}){3})',
