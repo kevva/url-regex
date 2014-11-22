@@ -1,4 +1,4 @@
-# url-regex [![Build Status](https://travis-ci.org/kevva/url-regex.svg?branch=master)](https://travis-ci.org/kevva/url-regex)
+# url-regex [![Build Status](http://img.shields.io/travis/kevva/url-regex.svg?style=flat)](https://travis-ci.org/kevva/url-regex)
 
 > Regular expression for matching URLs
 
