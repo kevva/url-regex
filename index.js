@@ -34,6 +34,6 @@ module.exports = function (opts) {
 		'(?:localhost)|' + host + domain + tld + ')' + port + path
 	].join('');
 
-	return opts.exact ? new RegExp('(?:^' + regex + '$)') :
+	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
 						new RegExp('(?:^|\\s)(["\'])?' + regex + '\\1', 'ig');
 };
