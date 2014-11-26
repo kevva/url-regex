@@ -8,7 +8,9 @@ var tlds = require('./tlds.json').join('|');
  * @api public
  */
 
-module.exports = function () {
+module.exports = function (opts) {
+	opts = opts || {};
+
 	var auth = '(?:\\S+(?::\\S*)?@)?';
 	var domain = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))*';
 	var host = '(?:xn--[a-z0-9\\-]{1,59}|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))';
@@ -27,8 +29,11 @@ module.exports = function () {
 		'(?:\\.(?:[1-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))'
 	].join('');
 
-	return new RegExp([
-		'(?:^|\\s)(["\'])?' + protocol + auth + '(?:' + ips + '|',
-		'(?:localhost)|' + host + domain + tld + ')' + port + path + '\\1'
-	].join(''), 'ig');
+	var regex = [
+		protocol + auth + '(?:' + ips + '|',
+		'(?:localhost)|' + host + domain + tld + ')' + port + path
+	].join('');
+
+	return opts.exact ? new RegExp('(?:^' + regex + '$)') :
+						new RegExp('(?:^|\\s)(["\'])?' + regex + '\\1', 'ig');
 };
