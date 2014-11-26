@@ -15,16 +15,19 @@ $ npm install --save url-regex
 ```js
 var urlRegex = require('url-regex');
 
-urlRegex().test('https://github.com');
+urlRegex().test('github.com foo bar');
 //=> true
 
-urlRegex().exec('This is a cool site https://github.com')[0].trim();
-//=> https://github.com
+urlRegex({exact: true}).test('github.com foo bar');
+//=> false
 
-'Multiple https://github.com http://google.com URLs'.match(urlRegex());
-//=> ['https://github.com', 'http://google.com']
+urlRegex({exact: true}).test('github.com');
+//=> true
+
+'foo github.com bar google.com'.match(urlRegex());
+//=> ['github.com', 'google.com']
 ```
 
 ## License
 
-MIT © [Diego Perini](https://gist.github.com/dperini)
+MIT © [Diego Perini](https://github.com/dperini)
