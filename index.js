@@ -5,6 +5,7 @@ var tlds = require('./tlds.json').join('|');
 /**
  * Regular expression for matching URLs
  *
+ * @param {Object} opts
  * @api public
  */
 
