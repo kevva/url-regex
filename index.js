@@ -1,5 +1,6 @@
 'use strict';
 
+var ip = require('ip-regex').v4().source;
 var tlds = require('./tlds.json').join('|');
 
 /**
@@ -19,7 +20,6 @@ module.exports = function (opts) {
 	var port = '(?::\\d{2,5})?';
 	var protocol = '(?:(?:(?:\\w)+:)?\/\/)?';
 	var tld = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|' + tlds + '+))';
-	var ip = '(?:25[0-5]|2[0-4][0-9]|1?[0-9][0-9]{1,2}|0){1,}(?:\\.(?:25[0-5]|2[0-4][0-9]|1?[0-9]{1,2}|0)){3}';
 
 	var regex = [
 		protocol + auth + '(?:' + ip + '|',
