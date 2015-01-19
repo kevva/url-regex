@@ -1,7 +1,7 @@
 'use strict';
 
 var ip = require('ip-regex').v4().source;
-var tlds = require('./tlds.json').join('|');
+var TLDS = require('./tlds.json').join('|');
 
 /**
  * Regular expression for matching URLs
@@ -12,6 +12,14 @@ var tlds = require('./tlds.json').join('|');
 
 module.exports = function (opts) {
 	opts = opts || {};
+
+	var tlds;
+	if (opts.additionalTlds
+	    && typeof opts.additionalTlds == 'object'
+	    && opts.additionalTlds.length) {
+		tlds = opts.additionalTlds.join('|') + '|' + TLDS;
+	}
+	else tlds = TLDS;
 
 	var auth = '(?:\\S+(?::\\S*)?@)?';
 	var domain = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))*';
