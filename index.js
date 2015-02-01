@@ -3,13 +3,6 @@
 var ip = require('ip-regex').v4().source;
 var tlds = require('./tlds.json').join('|');
 
-/**
- * Regular expression for matching URLs
- *
- * @param {Object} opts
- * @api public
- */
-
 module.exports = function (opts) {
 	opts = opts || {};
 

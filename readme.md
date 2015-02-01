@@ -30,4 +30,4 @@ urlRegex({exact: true}).test('github.com');
 
 ## License
 
-MIT © [Diego Perini](https://github.com/dperini)
+MIT © [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
