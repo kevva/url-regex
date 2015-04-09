@@ -4,11 +4,13 @@
 
 Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 
+
 ## Install
 
-```sh
+```
 $ npm install --save url-regex
 ```
+
 
 ## Usage
 
@@ -27,6 +29,22 @@ urlRegex({exact: true}).test('github.com');
 'foo github.com bar google.com'.match(urlRegex());
 //=> ['github.com', 'google.com']
 ```
+
+
+## API
+
+### urlRegex(options)
+
+Returns a regex for matching URLs.
+
+#### options.exact
+
+Type: `boolean`  
+Default: `false` *(Matches any URL in a string)*
+
+Only match an exact string.  
+Useful with `RegExp#test` to check if a string is a URL.
+
 
 ## License
 
