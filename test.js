@@ -1,5 +1,4 @@
 'use strict';
-
 var test = require('ava');
 var tlds = require('tlds');
 var urlRegex = require('./');

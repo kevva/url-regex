@@ -1,5 +1,4 @@
 'use strict';
-
 var ip = require('ip-regex').v4().source;
 var tlds = require('./tlds.json').join('|');
 
