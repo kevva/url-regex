@@ -17,17 +17,17 @@ $ npm install --save url-regex
 ```js
 var urlRegex = require('url-regex');
 
-urlRegex().test('github.com foo bar');
+urlRegex().test('http://github.com foo bar');
 //=> true
 
-urlRegex({exact: true}).test('github.com foo bar');
+urlRegex({exact: true}).test('http://github.com foo bar');
 //=> false
 
-urlRegex({exact: true}).test('github.com');
+urlRegex({exact: true}).test('http://github.com');
 //=> true
 
-'foo github.com bar google.com'.match(urlRegex());
-//=> ['github.com', 'google.com']
+'foo http://github.com bar //google.com'.match(urlRegex());
+//=> ['http://github.com', '//google.com']
 ```
 
 

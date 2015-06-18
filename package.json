@@ -13,13 +13,10 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "prepublish": "node lib/index.js",
-    "pretest": "node lib/index.js",
     "test": "node test.js"
   },
   "files": [
-    "index.js",
-    "tlds.json"
+    "index.js"
   ],
   "keywords": [
     "regex",
@@ -30,7 +27,6 @@
     "ip-regex": "^1.0.1"
   },
   "devDependencies": {
-    "ava": "^0.0.4",
-    "tlds": "^1.14.0"
+    "ava": "^0.0.4"
   }
 }

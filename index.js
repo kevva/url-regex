@@ -1,21 +1,20 @@
 'use strict';
-var ip = require('ip-regex').v4().source;
-var tlds = require('./tlds.json').join('|');
+var ipRegex = require('ip-regex');
 
 module.exports = function (opts) {
 	opts = opts || {};
 
+	var protocol = '(?:(?:[a-z]+:)?//)';
 	var auth = '(?:\\S+(?::\\S*)?@)?';
-	var domain = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))*';
-	var host = '(?:xn--[a-z0-9\\-]{1,59}|(?:(?:[a-z\\u00a1-\\uffff0-9]+-?){0,62}[a-z\\u00a1-\\uffff0-9]{1,63}))';
-	var path = '(?:\/[^\\s]*)?';
+	var ip = ipRegex.v4().source;
+	var host = '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)';
+	var domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
+	var tld = '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))';
 	var port = '(?::\\d{2,5})?';
-	var protocol = '(?:(?:(?:\\w)+:)?\/\/)?';
-	var tld = '(?:\\.(?:xn--[a-z0-9\\-]{1,59}|' + tlds + '+))';
-
+	var path = '(?:/\\S*)?';
 	var regex = [
-		protocol + auth + '(?:' + ip + '|',
-		'(?:localhost)|' + host + domain + tld + ')' + port + path
+		protocol, auth, '(?:localhost|' + ip + '|' + host + domain + tld + ')',
+		port, path
 	].join('');
 
 	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
