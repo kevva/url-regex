@@ -45,6 +45,8 @@ test('match URLs', function (t) {
 		'http://1337.net',
 		'http://a.b-c.de',
 		'http://223.255.255.254',
+		'http://example.com?foo=bar',
+		'http://example.com#foo',
 		'ws://localhost:8080',
 		'ws://foo.ws',
 		'ws://foo.ws',
