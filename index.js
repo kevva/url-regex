@@ -18,5 +18,5 @@ module.exports = function (opts) {
 	].join('');
 
 	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
-						new RegExp('(["\'])?' + regex + '\\1', 'ig');
+						new RegExp(regex, 'ig');
 };

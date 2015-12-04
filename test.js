@@ -2,7 +2,7 @@
 var test = require('ava');
 var urlRegex = require('./');
 
-test('match URLs', function (t) {
+test('match exact URLs', function (t) {
 	var fixtures = [
 		'http://foo.com/blah_blah',
 		'http://foo.com/blah_blah/',
@@ -67,6 +67,30 @@ test('match URLs', function (t) {
 	t.end();
 });
 
+test('match URLs in text', function (t) {
+	var fixture = [
+		'Lorem ipsum //dolor.sit',
+		'<a href="http://example.com">example.com</a>',
+		'[and another](https://another.example.com)',
+		'Foo //bar.net/?q=Query with spaces'
+	].join('\n');
+
+	var expected = [
+		'//dolor.sit',
+		'http://example.com',
+		'https://another.example.com',
+		'//bar.net/?q=Query'
+	];
+
+	var actual = fixture.match(urlRegex());
+
+	expected.forEach(function (url, i) {
+		t.assert(actual[i] === url, actual[i]);
+	});
+
+	t.end();
+});
+
 test('do not match URLs', function (t) {
 	var fixtures = [
 		'http://',
@@ -112,9 +136,7 @@ test('do not match URLs', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		fixtures.forEach(function (el) {
-			t.assert(!urlRegex({exact: true}).test(el), el);
-		});
+		t.assert(!urlRegex({exact: true}).test(el), el);
 	});
 
 	t.end();
