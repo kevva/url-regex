@@ -112,10 +112,8 @@ test('do not match URLs', function (t) {
 	];
 
 	fixtures.forEach(function (el) {
-		fixtures.forEach(function (el) {
 			t.assert(!urlRegex({exact: true}).test(el), el);
 		});
-	});
 
 	t.end();
 });
