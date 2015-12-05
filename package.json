@@ -1,6 +1,6 @@
 {
   "name": "url-regex",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "Regular expression for matching URLs",
   "license": "MIT",
   "repository": "kevva/url-regex",
