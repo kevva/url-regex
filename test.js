@@ -1,9 +1,8 @@
-'use strict';
-var test = require('ava');
-var urlRegex = require('./');
+import test from 'ava';
+import fn from './';
 
-test('match exact URLs', function (t) {
-	var fixtures = [
+test('match exact URLs', t => {
+	const fixtures = [
 		'http://foo.com/blah_blah',
 		'http://foo.com/blah_blah/',
 		'http://foo.com/blah_blah_(wikipedia)',
@@ -62,39 +61,31 @@ test('match exact URLs', function (t) {
 		'//➡.ws/䨹'
 	];
 
-	fixtures.forEach(function (el) {
-		t.assert(urlRegex({exact: true}).test(el), el);
-	});
-
-	t.end();
+	fixtures.forEach(el => t.true(fn({exact: true}).test(el)));
 });
 
-test('match URLs in text', function (t) {
-	var fixture = [
+test('match URLs in text', t => {
+	const fixture = [
 		'Lorem ipsum //dolor.sit',
 		'<a href="http://example.com">example.com</a>',
 		'[and another](https://another.example.com)',
 		'Foo //bar.net/?q=Query with spaces'
 	].join('\n');
 
-	var expected = [
+	const expected = [
 		'//dolor.sit',
 		'http://example.com',
 		'https://another.example.com',
 		'//bar.net/?q=Query'
 	];
 
-	var actual = fixture.match(urlRegex());
+	const actual = fixture.match(fn());
 
-	expected.forEach(function (url, i) {
-		t.assert(actual[i] === url, actual[i]);
-	});
-
-	t.end();
+	expected.forEach((url, i) => t.is(actual[i], url));
 });
 
-test('do not match URLs', function (t) {
-	var fixtures = [
+test('do not match URLs', t => {
+	const fixtures = [
 		'http://',
 		'http://.',
 		'http://..',
@@ -137,9 +128,5 @@ test('do not match URLs', function (t) {
 		'///www.foo.bar./'
 	];
 
-	fixtures.forEach(function (el) {
-		t.assert(!urlRegex({exact: true}).test(el), el);
-	});
-
-	t.end();
+	fixtures.forEach(el => t.false(fn({exact: true}).test(el)));
 });
