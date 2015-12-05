@@ -37,7 +37,9 @@ urlRegex({exact: true}).test('http://github.com');
 
 Returns a regex for matching URLs.
 
-#### options.exact
+#### options
+
+##### exact
 
 Type: `boolean`  
 Default: `false` *(Matches any URL in a string)*
