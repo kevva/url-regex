@@ -65,12 +65,12 @@ test('match exact URLs', t => {
 });
 
 test('match URLs in text', t => {
-	const fixture = [
-		'Lorem ipsum //dolor.sit',
-		'<a href="http://example.com">example.com</a>',
-		'[and another](https://another.example.com)',
-		'Foo //bar.net/?q=Query with spaces'
-	].join('\n');
+	const fixture = `
+		Lorem ipsum //dolor.sit
+		<a href="http://example.com">example.com</a>
+		[and another](https://another.example.com) and
+		Foo //bar.net/?q=Query with spaces
+	`;
 
 	const expected = [
 		'//dolor.sit',
@@ -81,7 +81,7 @@ test('match URLs in text', t => {
 
 	const actual = fixture.match(fn());
 
-	expected.forEach((url, i) => t.is(actual[i], url));
+	t.same(actual, expected);
 });
 
 test('do not match URLs', t => {
