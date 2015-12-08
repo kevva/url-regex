@@ -68,20 +68,21 @@ test('match URLs in text', t => {
 	const fixture = `
 		Lorem ipsum //dolor.sit
 		<a href="http://example.com">example.com</a>
+		<a href="http://example.com/with-path">with path</a>
 		[and another](https://another.example.com) and
 		Foo //bar.net/?q=Query with spaces
 	`;
 
+	const actual = fixture.match(fn());
 	const expected = [
 		'//dolor.sit',
 		'http://example.com',
+		'http://example.com/with-path',
 		'https://another.example.com',
 		'//bar.net/?q=Query'
 	];
 
-	const actual = fixture.match(fn());
-
-	t.same(actual, expected);
+	expected.forEach((x, i) => t.is(actual[i], x));
 });
 
 test('do not match URLs', t => {
