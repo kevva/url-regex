@@ -11,7 +11,7 @@ module.exports = function (opts) {
 	var domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
 	var tld = '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))';
 	var port = '(?::\\d{2,5})?';
-	var path = '(?:[/?#]\\S*)?';
+	var path = '(?:[/?#][^\\s"]*)?';
 	var regex = [
 		protocol, auth, '(?:localhost|' + ip + '|' + host + domain + tld + ')',
 		port, path
