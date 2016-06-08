@@ -59,7 +59,8 @@ test('match exact URLs', t => {
 		'//223.255.255.254',
 		'//userid:password@example.com',
 		'//➡.ws/䨹',
-		'www.google.com/unicorn'
+		'www.google.com/unicorn',
+		'http://example.com.'
 	];
 
 	fixtures.forEach(el => t.true(fn({exact: true}).test(el)));
@@ -116,7 +117,6 @@ test('do not match URLs', t => {
 		'http://123.123.123',
 		'http://3628126748',
 		'http://.www.foo.bar/',
-		'http://www.foo.bar./',
 		'http://.www.foo.bar./',
 		'http://go/ogle.com',
 		'http://foo.bar/ /',
