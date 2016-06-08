@@ -17,6 +17,5 @@ module.exports = function (opts) {
 		port, path
 	].join('');
 
-	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
-						new RegExp(regex, 'ig');
+	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') : new RegExp(regex, 'ig');
 };

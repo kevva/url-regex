@@ -15,7 +15,7 @@ $ npm install --save url-regex
 ## Usage
 
 ```js
-var urlRegex = require('url-regex');
+const urlRegex = require('url-regex');
 
 urlRegex().test('http://github.com foo bar');
 //=> true
@@ -44,10 +44,10 @@ Returns a regex for matching URLs.
 
 ##### exact
 
-Type: `boolean`  
+Type: `boolean`<br>
 Default: `false` *(Matches any URL in a string)*
 
-Only match an exact string.  
+Only match an exact string.
 Useful with `RegExp#test` to check if a string is a URL.
 
 

@@ -63,7 +63,7 @@ test('match exact URLs', t => {
 		'http://example.com.'
 	];
 
-	fixtures.forEach(el => t.true(fn({exact: true}).test(el)));
+	fixtures.forEach(x => t.true(fn({exact: true}).test(x)));
 });
 
 test('match URLs in text', t => {
@@ -130,5 +130,5 @@ test('do not match URLs', t => {
 		'///www.foo.bar./'
 	];
 
-	fixtures.forEach(el => t.false(fn({exact: true}).test(el)));
+	fixtures.forEach(x => t.false(fn({exact: true}).test(x)));
 });
