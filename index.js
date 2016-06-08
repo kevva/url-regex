@@ -9,7 +9,7 @@ module.exports = function (opts) {
 	var ip = ipRegex.v4().source;
 	var host = '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)';
 	var domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
-	var tld = '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))';
+	var tld = '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?';
 	var port = '(?::\\d{2,5})?';
 	var path = '(?:[/?#][^\\s"]*)?';
 	var regex = [
@@ -17,6 +17,5 @@ module.exports = function (opts) {
 		port, path
 	].join('');
 
-	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') :
-						new RegExp(regex, 'ig');
+	return opts.exact ? new RegExp('(?:^' + regex + '$)', 'i') : new RegExp(regex, 'ig');
 };

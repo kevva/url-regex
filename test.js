@@ -3,6 +3,7 @@ import fn from './';
 
 test('match exact URLs', t => {
 	const fixtures = [
+		'http://example.com.',
 		'http://foo.com/blah_blah',
 		'http://foo.com/blah_blah/',
 		'http://foo.com/blah_blah_(wikipedia)',
@@ -115,7 +116,6 @@ test('do not match URLs', t => {
 		'http://123.123.123',
 		'http://3628126748',
 		'http://.www.foo.bar/',
-		'http://www.foo.bar./',
 		'http://.www.foo.bar./',
 		'http://go/ogle.com',
 		'http://foo.bar/ /',
