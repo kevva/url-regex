@@ -58,7 +58,8 @@ test('match exact URLs', t => {
 		'//a.b-c.de',
 		'//223.255.255.254',
 		'//userid:password@example.com',
-		'//➡.ws/䨹'
+		'//➡.ws/䨹',
+		'www.google.com/unicorn'
 	];
 
 	fixtures.forEach(el => t.true(fn({exact: true}).test(el)));
