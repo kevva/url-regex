@@ -48,7 +48,6 @@ test('match exact URLs', t => {
 		'http://example.com#foo',
 		'ws://localhost:8080',
 		'ws://foo.ws',
-		'ws://foo.ws',
 		'ws://a.b-c.de',
 		'ws://223.255.255.254',
 		'ws://userid:password@example.com',
