@@ -12,8 +12,18 @@ module.exports = function (opts) {
 	var tld = '(?:\\.(?:[a-z\\u00a1-\\uffff]{2,}))\\.?';
 	var port = '(?::\\d{2,5})?';
 	var path = '(?:[/?#][^\\s"]*)?';
+	var withProtocol = '(?:' + protocol + '|www\\.)' + auth + '(?:localhost|' + ip + '|' + host + domain + tld + ')';
+	var withOutProtocol = '(?:localhost|' + host + domain + tld + ')';
+
+	var foo = '';
+	if (opts.liberal) {
+		foo = '(?:' + withProtocol + '|' + withOutProtocol + ')';
+	} else {
+		foo = withProtocol;
+	}
+
 	var regex = [
-		'(?:' + protocol + '|www\\.)' + auth, '(?:localhost|' + ip + '|' + host + domain + tld + ')',
+		foo,
 		port, path
 	].join('');
 
