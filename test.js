@@ -1,5 +1,5 @@
 import test from 'ava';
-import fn from './';
+import m from './';
 
 test('match exact URLs', t => {
 	const fixtures = [
@@ -62,7 +62,9 @@ test('match exact URLs', t => {
 		'http://example.com.'
 	];
 
-	fixtures.forEach(x => t.true(fn({exact: true}).test(x)));
+	for (const x of fixtures) {
+		t.true(m({exact: true}).test(x));
+	}
 });
 
 test('match URLs in text', t => {
@@ -74,16 +76,13 @@ test('match URLs in text', t => {
 		Foo //bar.net/?q=Query with spaces
 	`;
 
-	const actual = fixture.match(fn());
-	const expected = [
+	t.deepEqual([
 		'//dolor.sit',
 		'http://example.com',
 		'http://example.com/with-path',
 		'https://another.example.com',
 		'//bar.net/?q=Query'
-	];
-
-	expected.forEach((x, i) => t.is(actual[i], x));
+	], fixture.match(m()));
 });
 
 test('do not match URLs', t => {
@@ -129,5 +128,7 @@ test('do not match URLs', t => {
 		'///www.foo.bar./'
 	];
 
-	fixtures.forEach(x => t.false(fn({exact: true}).test(x)));
+	for (const x of fixtures) {
+		t.false(m({exact: true}).test(x));
+	}
 });

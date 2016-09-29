@@ -45,10 +45,9 @@ Returns a regex for matching URLs.
 ##### exact
 
 Type: `boolean`<br>
-Default: `false` *(Matches any URL in a string)*
+Default: `false`
 
-Only match an exact string.
-Useful with `RegExp#test` to check if a string is a URL.
+Only match an exact string. Useful with `RegExp#test` to check if a string is a URL.
 
 
 ## License
