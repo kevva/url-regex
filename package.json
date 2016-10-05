@@ -13,10 +13,13 @@
     "node": ">=4"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && ava",
+    "compile": "babel -d dist --presets es2015 index.js",
+    "prepublish": "npm run compile"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "dist"
   ],
   "keywords": [
     "regex",
@@ -28,6 +31,8 @@
   },
   "devDependencies": {
     "ava": "*",
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
     "xo": "*"
   },
   "xo": {
