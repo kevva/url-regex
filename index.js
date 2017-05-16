@@ -1,7 +1,7 @@
 'use strict';
 const ipRegex = require('ip-regex');
 
-module.exports = function(opts) {
+module.exports = function (opts) {
 	opts = opts || {};
 
 	const protocol = '(?:(?:[a-z]+:)?//)';
@@ -17,6 +17,5 @@ module.exports = function(opts) {
 		port + path;
 
 	return opts.exact ?
-		new RegExp('(?:^' + regex + '$)', 'i') : 
-		new RegExp(regex, 'ig');
+		new RegExp('(?:^' + regex + '$)', 'i') : new RegExp(regex, 'ig');
 };
