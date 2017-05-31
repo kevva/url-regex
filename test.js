@@ -132,3 +132,66 @@ test('do not match URLs', t => {
 		t.false(m({exact: true}).test(x));
 	}
 });
+
+test('match using list of TLDs', t => {
+	const fixtures = [
+		'foo.com/blah_blah',
+		'foo.com/blah_blah/',
+		'foo.com/blah_blah_(wikipedia)',
+		'foo.com/blah_blah_(wikipedia)_(again)',
+		'www.example.com/wpstyle/?p=364',
+		'www.example.com/foo/?bar=baz&inga=42&quux',
+		'a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z.com',
+		'mw1.google.com/mw-earth-vectordb/kml-samples/gp/seattle/gigapxl/$[level]/r$[y]_c$[x].jpg',
+		'user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body',
+		'www.microsoft.xn--comindex-g03d.html.irongeek.com',
+		'✪df.ws/123',
+		'localhost/',
+		'userid:password@example.com:8080',
+		'userid:password@example.com:8080/',
+		'userid@example.com',
+		'userid@example.com/',
+		'userid@example.com:8080',
+		'userid@example.com:8080/',
+		'userid:password@example.com',
+		'userid:password@example.com/',
+		'142.42.1.1/',
+		'142.42.1.1:8080/',
+		'➡.ws/䨹',
+		'⌘.ws',
+		'⌘.ws/',
+		'foo.com/blah_(wikipedia)#cite-1',
+		'foo.com/blah_(wikipedia)_blah#cite-1',
+		'foo.com/unicode_(✪)_in_parens',
+		'foo.com/(something)?after=parens',
+		'☺.damowmow.com/',
+		'code.google.com/events/#&product=browser',
+		'j.mp',
+		'foo.bar/baz',
+		'foo.bar/?q=Test%20URL-encoded%20stuff',
+		'-.~_!$&\'()*+\';=:%40:80%2f::::::@example.com',
+		'1337.net',
+		'a.b-c.de',
+		'223.255.255.254',
+		'example.com?foo=bar',
+		'example.com#foo',
+		'localhost:8080',
+		'foo.ws',
+		'a.b-c.de',
+		'223.255.255.254',
+		'userid:password@example.com',
+		'➡.ws/䨹',
+		'//localhost:8080',
+		'//foo.ws',
+		'//a.b-c.de',
+		'//223.255.255.254',
+		'//userid:password@example.com',
+		'//➡.ws/䨹',
+		'www.google.com/unicorn',
+		'example.com.'
+	];
+
+	for (const x of fixtures) {
+		t.true(m({exact: true, strict: false}).test(x));
+	}
+});
