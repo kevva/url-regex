@@ -50,6 +50,12 @@ Default: `false`
 Only match an exact string. Useful with `RegExp#test` to check if a string is a URL.
 
 
+## Related
+
+- [get-urls](https://github.com/sindresorhus/get-urls) - Get all URLs in text
+- [linkify-urls](https://github.com/sindresorhus/linkify-urls) - Linkify URLs in text
+
+
 ## License
 
 MIT © [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
