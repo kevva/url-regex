@@ -1,5 +1,6 @@
 import test from 'ava';
-import m from './';
+import nonStrict from './non-strict';
+import strict from './';
 
 test('match exact URLs', t => {
 	const fixtures = [
@@ -63,7 +64,7 @@ test('match exact URLs', t => {
 	];
 
 	for (const x of fixtures) {
-		t.true(m({exact: true}).test(x));
+		t.true(strict({exact: true}).test(x));
 	}
 });
 
@@ -82,7 +83,7 @@ test('match URLs in text', t => {
 		'http://example.com/with-path',
 		'https://another.example.com',
 		'//bar.net/?q=Query'
-	], fixture.match(m()));
+	], fixture.match(strict()));
 });
 
 test('do not match URLs', t => {
@@ -129,7 +130,7 @@ test('do not match URLs', t => {
 	];
 
 	for (const x of fixtures) {
-		t.false(m({exact: true}).test(x));
+		t.false(strict({exact: true}).test(x));
 	}
 });
 
@@ -192,6 +193,6 @@ test('match using list of TLDs', t => {
 	];
 
 	for (const x of fixtures) {
-		t.true(m({exact: true, strict: false}).test(x));
+		t.true(nonStrict({exact: true}).test(x));
 	}
 });
