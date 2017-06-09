@@ -29,14 +29,21 @@ urlRegex({exact: true}).test('http://github.com foo bar');
 urlRegex({exact: true}).test('http://github.com');
 //=> true
 
-urlRegex({strict: false}).test('github.com foo bar');
-//=> true
-
-urlRegex({exact: true, strict: false}).test('github.com');
-//=> true
-
 'foo http://github.com bar //google.com'.match(urlRegex());
 //=> ['http://github.com', '//google.com']
+```
+
+`url-regex` forces URLs to start with a valid protocol or `www`.
+
+`url-regex/non-strict` doesn't have this restriction. It'll also match the TLD against a list of valid [TLDs](https://github.com/stephenmathieson/node-tlds).
+
+```js
+const nonStrictUrlRegex = require('url-regex/non-strict');
+nonStrictUrlRegex().test('github.com foo bar');
+//=> true
+
+nonStrictUrlRegex({exact: true}).test('github.com');
+//=> true
 ```
 
 
@@ -54,14 +61,6 @@ Type: `boolean`<br>
 Default: `false`
 
 Only match an exact string. Useful with `RegExp#test` to check if a string is a URL.
-
-##### strict
-
-Type: `boolean`<br>
-Default: `true`
-
-Force URLs to start with a valid protocol or `www`. If set to `false` it'll match the TLD against a list of valid [TLDs](https://github.com/stephenmathieson/node-tlds).
-
 
 ## Related
 
