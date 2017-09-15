@@ -29,7 +29,11 @@
   },
   "devDependencies": {
     "ava": "*",
-    "xo": "*"
+    "xo": "*",
+    "eslint-plugin-ava": "*",
+    "eslint-plugin-unicorn": "*",
+    "eslint-plugin-import": "*",
+    "eslint-config-xo": "*"
   },
   "xo": {
     "esnext": true
