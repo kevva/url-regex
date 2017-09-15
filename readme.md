@@ -1,8 +1,10 @@
-# url-regex [![Build Status](http://img.shields.io/travis/kevva/url-regex.svg?style=flat)](https://travis-ci.org/kevva/url-regex)
+# url-regex [![Build Status](http://img.shields.io/travis/averissimo/url-regex.svg?style=flat)](https://travis-ci.org/averissimo/url-regex)
 
 > Regular expression for matching URLs
 
-Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
+This is a fork of [kevva/url-regex](http://github.com/kevva/url-regex) that deals with parenthesis in the end of textual links
+
+Originaly based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 
 
 ## Install
