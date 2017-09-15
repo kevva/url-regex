@@ -2,7 +2,7 @@
 
 > Regular expression for matching URLs
 
-This is a fork of [kevva/url-regex](http://github.com/kevva/url-regex) that deals with parenthesis in the end of textual links
+This is a fork of [kevva/url-regex](https://github.com/kevva/url-regex) that deals with parenthesis in the end of textual links
 
 Originaly based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 
@@ -73,4 +73,4 @@ Force URLs to start with a valid protocol or `www`. If set to `false` it'll matc
 
 ## License
 
-MIT © [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
+MIT © [André Veríssimo](https://github.com/averissimo), [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
