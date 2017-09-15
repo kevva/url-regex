@@ -15,11 +15,11 @@ module.exports = opts => {
 	// Original regular expression from kevva (but not accepting any closing parenthesis)
 	const path = '(?:[/?#][^\\s\\)"]*)?';
 
-  const regex1 = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path}`;
+	const regex1 = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path}`;
 	// Accepts all closing parenthesis if there is an opening one
 	const path2 = '(?:[/?#]([^\\s"]*\\([^\\s"]*))';
 	const regex2 = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path2}`;
-  // Accepts closing parenthesis as long as in middle of link (not in the last)
+	// Accepts closing parenthesis as long as in middle of link (not in the last)
 	const path3 = '(?:[/?#][^\\s"]*[^\\s\\)"]+)?';
 	const regex3 = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path3}`;
 	// Builds on all three regular expressions
