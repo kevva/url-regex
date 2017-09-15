@@ -1,6 +1,24 @@
 import test from 'ava';
 import m from './';
 
+test('match URLs with parenthesis in text', t => {
+	const fixture = `
+		<a href="http://example.com/with-path))">with path</a>
+		<a href="http://example.com/with-path)">with path</a>
+		<a href="http://example.com/with-(path)">with path</a>
+		<a href="http://example.com/with-(path">with path</a>
+		<a href="http://example.com/with-)path">with path</a>
+	`;
+
+	t.deepEqual([
+		'http://example.com/with-path',
+		'http://example.com/with-path',
+		'http://example.com/with-(path)',
+		'http://example.com/with-(path',
+		'http://example.com/with-)path'
+	], fixture.match(m()));
+});
+
 test('match exact URLs', t => {
 	const fixtures = [
 		'http://foo.com/blah_blah',
@@ -72,10 +90,6 @@ test('match URLs in text', t => {
 		Lorem ipsum //dolor.sit
 		<a href="http://example.com">example.com</a>
 		<a href="http://example.com/with-path">with path</a>
-		<a href="http://example.com/with-path)">with path</a>
-		<a href="http://example.com/with-(path)">with path</a>
-		<a href="http://example.com/with-(path">with path</a>
-		<a href="http://example.com/with-)path">with path</a>
 		[and another](https://another.example.com) and
 		Foo //bar.net/?q=Query with spaces
 	`;
@@ -84,10 +98,6 @@ test('match URLs in text', t => {
 		'//dolor.sit',
 		'http://example.com',
 		'http://example.com/with-path',
-		'http://example.com/with-path',
-		'http://example.com/with-(path)',
-		'http://example.com/with-(path',
-		'http://example.com/with-)path',
 		'https://another.example.com',
 		'//bar.net/?q=Query'
 	], fixture.match(m()));

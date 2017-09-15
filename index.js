@@ -21,7 +21,7 @@ module.exports = opts => {
 	const path3 = '(?:[/?#][^\\s"]*[^\\s\\)"]+)?';
 	const regex3 = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path3}`;
 
-	const regex = `(${regex2})|(${regex3})|(${regex1})`;
+	const regex = `((${regex2})|(${regex3})|(${regex1}))`;
 
 	return opts.exact ? new RegExp(`(?:^${regex}$)`, 'i') : new RegExp(regex, 'ig');
 };
