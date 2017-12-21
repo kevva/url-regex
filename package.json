@@ -1,6 +1,6 @@
 {
-  "name": "url-regex",
-  "version": "5.0.0",
+  "name": "uber-url-regex",
+  "version": "5.0.1",
   "description": "Regular expression for matching URLs",
   "license": "MIT",
   "repository": "averissimo/url-regex",
