@@ -1,5 +1,5 @@
 import test from 'ava';
-import m from './';
+import m from './index';
 
 test('match exact URLs', t => {
 	const fixtures = [
@@ -193,5 +193,25 @@ test('match using list of TLDs', t => {
 
 	for (const x of fixtures) {
 		t.true(m({exact: true, strict: false}).test(x));
+	}
+});
+
+const localUrlFixtures = [
+	'http://orgchart/index.php',
+	'http://aplicakcepredpisy/index.php?tpl=pk_khika$book_id=1057',
+	'http://forge/library/home/'
+];
+
+test('match local URLs', t => {
+	for (const x of localUrlFixtures) {
+		t.true(m({exact: true, local: true}).test(x));
+	}
+});
+
+test('should not match local domains but localhost', t => {
+	t.true(m({exact: true}).test('http://localhost/'));
+
+	for (const x of localUrlFixtures) {
+		t.false(m({exact: true}).test(x));
 	}
 });
