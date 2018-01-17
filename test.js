@@ -215,3 +215,25 @@ test('should not match local domains but localhost', t => {
 		t.false(m({exact: true}).test(x));
 	}
 });
+
+test('should not match words or text as local URLs', t => {
+	const fixtures = [
+		'text',
+		'text with more words, but still without URLs',
+		'text without url and/or slash'
+	];
+
+	for (const x of fixtures) {
+		t.false(m({strict: false, exact: false, local: true}).test(x));
+	}
+});
+
+test('match local URLs in text', t => {
+	const fixtures = [
+		'text with local(http://orgchart/index.php) urls'
+	];
+
+	for (const x of fixtures) {
+		t.true(m({strict: false, exact: false, local: true}).test(x));
+	}
+});
