@@ -1,6 +1,24 @@
 import test from 'ava';
 import m from './';
 
+test('match URLs with parenthesis in text', t => {
+	const fixture = `
+		<a href="http://example.com/with-path))">with path</a>
+		<a href="http://example.com/with-path)">with path</a>
+		<a href="http://example.com/with-(path)">with path</a>
+		<a href="http://example.com/with-(path">with path</a>
+		<a href="http://example.com/with-)path">with path</a>
+	`;
+
+	t.deepEqual([
+		'http://example.com/with-path',
+		'http://example.com/with-path',
+		'http://example.com/with-(path)',
+		'http://example.com/with-(path',
+		'http://example.com/with-)path'
+	], fixture.match(m()));
+});
+
 test('match exact URLs', t => {
 	const fixtures = [
 		'http://foo.com/blah_blah',

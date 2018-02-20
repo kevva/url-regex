@@ -1,13 +1,13 @@
 {
-  "name": "url-regex",
-  "version": "4.1.1",
+  "name": "uber-url-regex",
+  "version": "5.0.2",
   "description": "Regular expression for matching URLs",
   "license": "MIT",
-  "repository": "kevva/url-regex",
+  "repository": "averissimo/url-regex",
   "author": {
-    "name": "Kevin Mårtensson",
-    "email": "kevinmartensson@gmail.com",
-    "url": "https://github.com/kevva"
+    "name": "André Veríssimo",
+    "email": "afsverissimo@gmail.com",
+    "url": "https://github.com/averissimo"
   },
   "engines": {
     "node": ">=4"
@@ -24,12 +24,17 @@
     "url"
   ],
   "dependencies": {
-    "ip-regex": "^1.0.1",
-    "tlds": "^1.187.0"
+    "ip-regex": "^2.1.0",
+    "tlds": "^1.199.0"
   },
   "devDependencies": {
-    "ava": "*",
-    "xo": "*"
+    "ava": "^0.25.0",
+    "xo": "^0.18.2",
+    "eslint": "^4.13.1",
+    "eslint-plugin-ava": "^4.4.0",
+    "eslint-plugin-unicorn": "^4.0.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-config-xo": "^0.19.0"
   },
   "xo": {
     "esnext": true

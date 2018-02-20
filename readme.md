@@ -1,8 +1,12 @@
-# url-regex [![Build Status](http://img.shields.io/travis/kevva/url-regex.svg?style=flat)](https://travis-ci.org/kevva/url-regex)
+# url-regex [![Build Status](http://img.shields.io/travis/averissimo/url-regex.svg?style=flat)](https://travis-ci.org/averissimo/url-regex)
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/averissimo/url-regex.svg)](https://greenkeeper.io/)
 
 > Regular expression for matching URLs
 
-Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
+This is a fork of [kevva/url-regex](https://github.com/kevva/url-regex) that deals with parenthesis in the end of textual links
+
+Originaly based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 
 
 ## Install
@@ -71,4 +75,4 @@ Force URLs to start with a valid protocol or `www`. If set to `false` it'll matc
 
 ## License
 
-MIT © [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
+MIT © [André Veríssimo](https://github.com/averissimo), [Kevin Mårtensson](https://github.com/kevva) and [Diego Perini](https://github.com/dperini)
