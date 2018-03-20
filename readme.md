@@ -1,4 +1,4 @@
-# url-regex [![Build Status](http://img.shields.io/travis/kevva/url-regex.svg?style=flat)](https://travis-ci.org/kevva/url-regex)
+# url-regex-local
 
 > Regular expression for matching URLs
 
@@ -8,7 +8,7 @@ Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 ## Install
 
 ```
-$ npm install --save url-regex
+$ npm install --save url-regex-local
 ```
 
 

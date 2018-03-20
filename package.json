@@ -1,7 +1,7 @@
 {
   "name": "url-regex-local",
-  "version": "1.0.0",
-  "description": "Regular expression for matching URLs, forked & extended version",
+  "version": "1.0.1",
+  "description": "Regular expression for matching URLs, forked & extended version with local URL matching",
   "license": "MIT",
   "repository": "samotlark/url-regex",
   "author": {
