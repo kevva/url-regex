@@ -1,4 +1,4 @@
-# url-regex [![Build Status](http://img.shields.io/travis/kevva/url-regex.svg?style=flat)](https://travis-ci.org/kevva/url-regex)
+# url-regex-local
 
 > Regular expression for matching URLs
 
@@ -8,7 +8,7 @@ Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 ## Install
 
 ```
-$ npm install --save url-regex
+$ npm install --save url-regex-local
 ```
 
 
@@ -27,6 +27,9 @@ urlRegex({exact: true}).test('http://github.com foo bar');
 //=> false
 
 urlRegex({exact: true}).test('http://github.com');
+//=> true
+
+urlRegex({exact: true, local: true}).test('http://orgchart/index.php');
 //=> true
 
 urlRegex({strict: false}).test('github.com foo bar');
@@ -61,6 +64,13 @@ Type: `boolean`<br>
 Default: `true`
 
 Force URLs to start with a valid protocol or `www`. If set to `false` it'll match the TLD against a list of valid [TLDs](https://github.com/stephenmathieson/node-tlds).
+
+##### local
+
+Type: `boolean`<br>
+Default: `false`
+
+Allow also to test URLs with private network hosts. If set to `true` it'll match local URLs like `http://forge/library/home/` (without TLD).
 
 
 ## Related

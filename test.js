@@ -1,5 +1,5 @@
 import test from 'ava';
-import m from './';
+import m from './index';
 
 test('match exact URLs', t => {
 	const fixtures = [
@@ -193,5 +193,47 @@ test('match using list of TLDs', t => {
 
 	for (const x of fixtures) {
 		t.true(m({exact: true, strict: false}).test(x));
+	}
+});
+
+const localUrlFixtures = [
+	'http://orgchart/index.php',
+	'http://aplicakcepredpisy/index.php?tpl=pk_khika$book_id=1057',
+	'http://forge/library/home/'
+];
+
+test('match local URLs', t => {
+	for (const x of localUrlFixtures) {
+		t.true(m({exact: true, local: true}).test(x));
+	}
+});
+
+test('should not match local domains but localhost', t => {
+	t.true(m({exact: true}).test('http://localhost/'));
+
+	for (const x of localUrlFixtures) {
+		t.false(m({exact: true}).test(x));
+	}
+});
+
+test('should not match words or text as local URLs', t => {
+	const fixtures = [
+		'text',
+		'text with more words, but still without URLs',
+		'text without url and/or slash'
+	];
+
+	for (const x of fixtures) {
+		t.false(m({strict: false, exact: false, local: true}).test(x));
+	}
+});
+
+test('match local URLs in text', t => {
+	const fixtures = [
+		'text with local(http://orgchart/index.php) urls'
+	];
+
+	for (const x of fixtures) {
+		t.true(m({strict: false, exact: false, local: true}).test(x));
 	}
 });

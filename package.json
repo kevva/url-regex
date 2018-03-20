@@ -1,13 +1,12 @@
 {
-  "name": "url-regex",
-  "version": "4.1.1",
-  "description": "Regular expression for matching URLs",
+  "name": "url-regex-local",
+  "version": "1.0.1",
+  "description": "Regular expression for matching URLs, forked & extended version with local URL matching",
   "license": "MIT",
-  "repository": "kevva/url-regex",
+  "repository": "samotlark/url-regex",
   "author": {
-    "name": "Kevin Mårtensson",
-    "email": "kevinmartensson@gmail.com",
-    "url": "https://github.com/kevva"
+    "name": "Tomáš Král",
+    "url": "https://github.com/samotlark"
   },
   "engines": {
     "node": ">=4"
