@@ -1,6 +1,12 @@
 import test from 'ava';
 import m from './index';
 
+const localUrlFixtures = [
+	'http://orgchart/index.php',
+	'http://aplicakcepredpisy/index.php?tpl=pk_khika$book_id=1057',
+	'http://forge/library/home/'
+];
+
 test('match exact URLs', t => {
 	const fixtures = [
 		'http://foo.com/blah_blah',
@@ -195,12 +201,6 @@ test('match using list of TLDs', t => {
 		t.true(m({exact: true, strict: false}).test(x));
 	}
 });
-
-const localUrlFixtures = [
-	'http://orgchart/index.php',
-	'http://aplicakcepredpisy/index.php?tpl=pk_khika$book_id=1057',
-	'http://forge/library/home/'
-];
 
 test('match local URLs', t => {
 	for (const x of localUrlFixtures) {
