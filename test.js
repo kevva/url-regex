@@ -1,5 +1,5 @@
 import test from 'ava';
-import m from './index';
+import m from '.';
 
 const localUrlFixtures = [
 	'http://orgchart/index.php',
