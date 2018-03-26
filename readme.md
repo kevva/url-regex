@@ -29,6 +29,9 @@ urlRegex({exact: true}).test('http://github.com foo bar');
 urlRegex({exact: true}).test('http://github.com');
 //=> true
 
+urlRegex({exact: true, local: true}).test('http://orgchart/index.php');
+//=> true
+
 urlRegex({strict: false}).test('github.com foo bar');
 //=> true
 
@@ -61,6 +64,13 @@ Type: `boolean`<br>
 Default: `true`
 
 Force URLs to start with a valid protocol or `www`. If set to `false` it'll match the TLD against a list of valid [TLDs](https://github.com/stephenmathieson/node-tlds).
+
+##### local
+
+Type: `boolean`<br>
+Default: `false`
+
+Allow also to test URLs with private network hosts. If set to `true` it'll match local URLs like `http://forge/library/home/` (without TLD).
 
 
 ## Related
