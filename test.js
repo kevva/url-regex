@@ -73,7 +73,8 @@ test('match URLs in text', t => {
 		<a href="http://example.com">example.com</a>
 		<a href="http://example.com/with-path">with path</a>
 		[and another](https://another.example.com) and
-		Foo //bar.net/?q=Query with spaces
+		Foo //bar.net/?q=Query with spaces,license/
+		background: url('http://example.com/pic.jpg'); height: 100px;
 	`;
 
 	t.deepEqual([
@@ -81,7 +82,8 @@ test('match URLs in text', t => {
 		'http://example.com',
 		'http://example.com/with-path',
 		'https://another.example.com',
-		'//bar.net/?q=Query'
+		'//bar.net/?q=Query',
+		'http://example.com/pic.jpg'
 	], fixture.match(m()));
 });
 
