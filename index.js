@@ -8,7 +8,7 @@ module.exports = opts => {
 	const protocol = `(?:(?:[a-z]+:)?//)${opts.strict ? '' : '?'}`;
 	const auth = '(?:\\S+(?::\\S*)?@)?';
 	const ip = ipRegex.v4().source;
-	const host = '(?:(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)';
+	const host = '(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)';
 	const domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';
 	const tld = `(?:\\.${opts.strict ? '(?:[a-z\\u00a1-\\uffff]{2,})' : `(?:${tlds.sort((a, b) => b.length - a.length).join('|')})`})\\.?`;
 	const port = '(?::\\d{2,5})?';

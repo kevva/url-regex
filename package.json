@@ -28,8 +28,8 @@
     "tlds": "^1.187.0"
   },
   "devDependencies": {
-    "ava": "*",
-    "xo": "*"
+    "ava": "^0.25.0",
+    "xo": "^0.20.3"
   },
   "xo": {
     "esnext": true

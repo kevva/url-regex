@@ -1,5 +1,5 @@
 import test from 'ava';
-import m from './';
+import m from '.';
 
 test('match exact URLs', t => {
 	const fixtures = [
@@ -10,6 +10,7 @@ test('match exact URLs', t => {
 		'http://www.example.com/wpstyle/?p=364',
 		'https://www.example.com/foo/?bar=baz&inga=42&quux',
 		'http://a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z.com',
+		'http://a_b.z.com',
 		'http://mw1.google.com/mw-earth-vectordb/kml-samples/gp/seattle/gigapxl/$[level]/r$[y]_c$[x].jpg',
 		'http://user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body',
 		'http://www.microsoft.xn--comindex-g03d.html.irongeek.com',
@@ -118,6 +119,8 @@ test('do not match URLs', t => {
 		'http://.www.foo.bar./',
 		'http://go/ogle.com',
 		'http://foo.bar/ /',
+		'http://a.b_z.com',
+		'http://ab_.z.com',
 		'http://google\\.com',
 		'http://www(google.com',
 		'http://www.example.xn--overly-long-punycode-test-string-test-tests-123-test-test123/',
