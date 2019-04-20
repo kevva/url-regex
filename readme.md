@@ -8,7 +8,7 @@ Based on this [gist](https://gist.github.com/dperini/729294) by Diego Perini.
 ## Install
 
 ```
-$ npm install --save url-regex
+$ npm install url-regex
 ```
 
 
@@ -42,9 +42,9 @@ urlRegex({exact: true, strict: false}).test('github.com');
 
 ## API
 
-### urlRegex(options)
+### urlRegex([options])
 
-Returns a regex for matching URLs.
+Returns a `RegExp` for matching URLs.
 
 #### options
 
