@@ -4,12 +4,13 @@ const tlds = require('tlds');
 
 module.exports = options => {
 	options = {
+		auth: true,
 		strict: true,
 		...options
 	};
 
 	const protocol = `(?:(?:[a-z]+:)?//)${options.strict ? '' : '?'}`;
-	const auth = '(?:\\S+(?::\\S*)?@)?';
+	const auth = options.auth ? '(?:\\S+(?::\\S*)?@)?' : '';
 	const ip = ipRegex.v4().source;
 	const host = '(?:(?:[a-z\\u00a1-\\uffff0-9][-_]*)*[a-z\\u00a1-\\uffff0-9]+)';
 	const domain = '(?:\\.(?:[a-z\\u00a1-\\uffff0-9]-*)*[a-z\\u00a1-\\uffff0-9]+)*';

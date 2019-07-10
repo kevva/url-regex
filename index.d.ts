@@ -13,6 +13,13 @@ declare namespace urlRegex {
 		@default true
 		*/
 		readonly strict?: boolean;
+
+		/**
+		Enable/disable match on [Basic HTTP Authentication Scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Basic_authentication_scheme)
+
+		@default true
+		*/
+		readonly auth?: boolean;
 	}
 }
 
@@ -40,6 +47,12 @@ urlRegex({strict: false}).test('github.com foo bar');
 
 urlRegex({exact: true, strict: false}).test('github.com');
 //=> true
+
+urlRegex({exact: true}).test('user@github.com');
+//=> true
+
+urlRegex({exact: true, auth: false}).test('user@github.com');
+//=> false
 
 'foo http://github.com bar //google.com'.match(urlRegex());
 //=> ['http://github.com', '//google.com']
