@@ -198,3 +198,72 @@ test('match using list of TLDs', t => {
 		t.true(urlRegex({exact: true, strict: false}).test(x));
 	}
 });
+
+test('opt out of matching basic auth', t => {
+	const strictFixturesWithAuth = [
+		'http://userid:password@example.com:8080',
+		'http://userid:password@example.com:8080/path',
+		'http://userid:password@example.com',
+		'http://userid:password@example.com/with/path',
+		'http://user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body',
+		'http://userid:password@example.com',
+		'http://userid@example.com',
+		'http://userid@example.com/with/path',
+		'http://userid@localhost:8080',
+		'http://userid@localhost:8080/path',
+		'http://-.~_!$&\'()*+\';=:%40:80%2f::::::@example.com'
+	];
+
+	for (const x of strictFixturesWithAuth) {
+		// With protocol
+		t.false(urlRegex({exact: true, strict: true, auth: false}).test(x));
+
+		// Relative protocol
+		t.false(urlRegex({exact: true, strict: false, auth: false}).test(x.replace('http', '')));
+
+		// No protocol
+		t.false(urlRegex({exact: true, strict: false, auth: false}).test(x.replace('http://', '')));
+	}
+
+	const textFixture = `
+		Lorem ipsum http://userid:password@example.com:8080 dolor sit
+		<a href="http://userid:password@example.com:8080/">example.com</a>
+		another //userid:password@example.com one
+		bites //userid:password@example.com/with/path the dust
+		and http://user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body another one
+		and <a href="http://user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body">another one</a>
+		and another <a href="userid:password@example.com">one gone</a>
+		and another userid@example.com one gone
+		another http://userid@example.com/ one
+		bites http://userid@localhost:8080 the
+		dust http://userid@localhost:8080/path
+	`;
+
+	// Strict matches none because auth always breaks the url
+	t.deepEqual(null, textFixture.match(urlRegex({exact: false, strict: true, auth: false})));
+
+	// Non-strict will only match domain:port/path as auth separates the protocol
+	const textFixtureMatches = [
+		'example.com:8080',
+		'example.com:8080/',
+		'example.com',
+		'example.com',
+		'example.com/with/path',
+		'example.com:123/one/two.three?q1=a1&q2=a2#body',
+		'example.com:123/one/two.three?q1=a1&q2=a2#body',
+		'example.com',
+		'example.com',
+		'example.com/',
+		'localhost:8080',
+		'localhost:8080/path'
+	];
+
+	// With protocol
+	t.deepEqual(textFixtureMatches, textFixture.match(urlRegex({exact: false, strict: false, auth: false})));
+
+	// Relative protocol
+	t.deepEqual(textFixtureMatches, textFixture.replace('http:', '').match(urlRegex({exact: false, strict: false, auth: false})));
+
+	// No protocol
+	t.deepEqual(textFixtureMatches, textFixture.replace('http://', '').match(urlRegex({exact: false, strict: false, auth: false})));
+});
