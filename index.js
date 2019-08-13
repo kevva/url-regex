@@ -3,10 +3,9 @@ const ipRegex = require('ip-regex');
 const tlds = require('tlds');
 
 module.exports = options => {
-	options = {
-		strict: true,
-		...options
-	};
+	options = Object.assign({
+		strict: true
+	}, options);
 
 	const protocol = `(?:(?:[a-z]+:)?//)${options.strict ? '' : '?'}`;
 	const auth = '(?:\\S+(?::\\S*)?@)?';
