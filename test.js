@@ -333,8 +333,8 @@ test('fail if not in explicit list of TLDs', t => {
 	}
 });
 
-		t.false(makeUrlRegex(
-			{exact: true, strict: false, tlds: ['com', 'ws', 'de', 'net', 'mp', 'bar']}
-		).test(x));
-	}
+test('fail for makeUrlRegex if tlds flag not present, strict false', t => {
+	t.throws(() => {
+		makeUrlRegex({exact: true, strict: false}).test('http://google.com');
+	}, {message: /tlds/});
 });
