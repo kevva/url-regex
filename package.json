@@ -17,7 +17,8 @@
 	},
 	"files": [
 		"index.js",
-		"index.d.ts"
+		"index.d.ts",
+		"make-url-regex.js"
 	],
 	"keywords": [
 		"regex",
