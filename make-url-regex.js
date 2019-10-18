@@ -6,6 +6,9 @@ module.exports = options => {
 		strict: true,
 		...options
 	};
+	if (!options.strict && !options.tlds) {
+		throw new Error('Need to provide `tlds` option if `strict === false`');
+	}
 
 	const protocol = `(?:(?:[a-z]+:)?//)${options.strict ? '' : '?'}`;
 	const auth = '(?:\\S+(?::\\S*)?@)?';
