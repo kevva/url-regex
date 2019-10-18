@@ -1,4 +1,5 @@
 import test from 'ava';
+import makeUrlRegex from './make-url-regex';
 import urlRegex from '.';
 
 test('match exact URLs', t => {
@@ -65,6 +66,7 @@ test('match exact URLs', t => {
 
 	for (const x of fixtures) {
 		t.true(urlRegex({exact: true}).test(x));
+		t.true(makeUrlRegex({exact: true}).test(x));
 	}
 });
 
@@ -77,13 +79,15 @@ test('match URLs in text', t => {
 		Foo //bar.net/?q=Query with spaces
 	`;
 
-	t.deepEqual([
-		'//dolor.sit',
-		'http://example.com',
-		'http://example.com/with-path',
-		'https://another.example.com',
-		'//bar.net/?q=Query'
-	], fixture.match(urlRegex()));
+	for (const makeRegex of [urlRegex, makeUrlRegex]) {
+		t.deepEqual([
+			'//dolor.sit',
+			'http://example.com',
+			'http://example.com/with-path',
+			'https://another.example.com',
+			'//bar.net/?q=Query'
+		], fixture.match(makeRegex()));
+	}
 });
 
 test('do not match URLs', t => {
@@ -133,6 +137,7 @@ test('do not match URLs', t => {
 
 	for (const x of fixtures) {
 		t.false(urlRegex({exact: true}).test(x));
+		t.false(makeUrlRegex({exact: true}).test(x));
 	}
 });
 
@@ -197,4 +202,139 @@ test('match using list of TLDs', t => {
 	for (const x of fixtures) {
 		t.true(urlRegex({exact: true, strict: false}).test(x));
 	}
+});
+
+test('match using explicit list of TLDs', t => {
+	const fixtures = [
+		'foo.com/blah_blah',
+		'foo.com/blah_blah/',
+		'foo.com/blah_blah_(wikipedia)',
+		'foo.com/blah_blah_(wikipedia)_(again)',
+		'www.example.com/wpstyle/?p=364',
+		'www.example.com/foo/?bar=baz&inga=42&quux',
+		'a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z.com',
+		'mw1.google.com/mw-earth-vectordb/kml-samples/gp/seattle/gigapxl/$[level]/r$[y]_c$[x].jpg',
+		'user:pass@example.com:123/one/two.three?q1=a1&q2=a2#body',
+		'www.microsoft.xn--comindex-g03d.html.irongeek.com',
+		'✪df.ws/123',
+		'localhost/',
+		'userid:password@example.com:8080',
+		'userid:password@example.com:8080/',
+		'userid@example.com',
+		'userid@example.com/',
+		'userid@example.com:8080',
+		'userid@example.com:8080/',
+		'userid:password@example.com',
+		'userid:password@example.com/',
+		'142.42.1.1/',
+		'142.42.1.1:8080/',
+		'➡.ws/䨹',
+		'⌘.ws',
+		'⌘.ws/',
+		'foo.com/blah_(wikipedia)#cite-1',
+		'foo.com/blah_(wikipedia)_blah#cite-1',
+		'foo.com/unicode_(✪)_in_parens',
+		'foo.com/(something)?after=parens',
+		'☺.damowmow.com/',
+		'code.google.com/events/#&product=browser',
+		'j.mp',
+		'foo.bar/baz',
+		'foo.bar/?q=Test%20URL-encoded%20stuff',
+		'-.~_!$&\'()*+\';=:%40:80%2f::::::@example.com',
+		'1337.net',
+		'a.b-c.de',
+		'223.255.255.254',
+		'example.com?foo=bar',
+		'example.com#foo',
+		'localhost:8080',
+		'foo.ws',
+		'a.b-c.de',
+		'223.255.255.254',
+		'userid:password@example.com',
+		'➡.ws/䨹',
+		'//localhost:8080',
+		'//foo.ws',
+		'//a.b-c.de',
+		'//223.255.255.254',
+		'//userid:password@example.com',
+		'//➡.ws/䨹',
+		'www.google.com/unicorn',
+		'example.com.',
+		'example.onion',
+		'unicorn.education',
+		'//➡.onion/䨹',
+		'userid:password@example.education',
+		'-.~_!$&\'()*+\';=:%40:80%2f::::::@example.onion',
+		'mw1.unicorn.education/mw-earth-vectordb/kml-samples/gp/seattle/gigapxl/$[level]/r$[y]_c$[x].jpg',
+		'www.example.onion/wpstyle/?p=364'
+	];
+
+	for (const x of fixtures) {
+		t.true(makeUrlRegex(
+			{exact: true, strict: false, tlds: ['com', 'ws', 'de', 'net', 'mp', 'bar', 'onion', 'education']}
+		).test(x));
+	}
+});
+
+test('fail if not in explicit list of TLDs', t => {
+	const fixtures = [
+		'foo.baz/blah_blah',
+		'foo.co.uk/blah_blah/',
+		'foo.biz/blah_blah_(wikipedia)',
+		'foo.onion/blah_blah_(wikipedia)_(again)',
+		'www.example.education/wpstyle/?p=364',
+		'www.example.biz/foo/?bar=baz&inga=42&quux',
+		'a.b.c.d.e.f.g.h.i.j.k.l.m.n.o.p.q.r.s.t.u.v.w.x.y.z.biz',
+		'mw1.google.biz/mw-earth-vectordb/kml-samples/gp/seattle/gigapxl/$[level]/r$[y]_c$[x].jpg',
+		'user:pass@example.biz:123/one/two.three?q1=a1&q2=a2#body',
+		'www.microsoft.xn--comindex-g03d.html.irongeek.biz',
+		'✪df.onion/123',
+		'userid:password@example.biz:8080',
+		'userid:password@example.biz:8080/',
+		'userid@example.biz',
+		'userid@example.biz/',
+		'userid@example.biz:8080',
+		'userid@example.biz:8080/',
+		'userid:password@example.biz',
+		'userid:password@example.biz/',
+		'➡.onion/䨹',
+		'⌘.onion',
+		'⌘.onion/',
+		'foo.biz/blah_(wikipedia)#cite-1',
+		'foo.biz/blah_(wikipedia)_blah#cite-1',
+		'foo.biz/unicode_(✪)_in_parens',
+		'foo.biz/(something)?after=parens',
+		'☺.damowmow.biz/',
+		'code.google.biz/events/#&product=browser',
+		'j.onion',
+		'foo.baz/baz',
+		'foo.baz/?q=Test%20URL-encoded%20stuff',
+		'-.~_!$&\'()*+\';=:%40:80%2f::::::@example.biz',
+		'1337.biz',
+		'a.b-c.ly',
+		'example.biz?foo=bar',
+		'example.biz#foo',
+		'foo.jp',
+		'a.b-c.cn',
+		'userid:password@example.biz',
+		'➡.uk/䨹',
+		'//foo.uk',
+		'//a.b-c.uk',
+		'//userid:password@example.biz',
+		'//➡.cn/䨹',
+		'www.google.biz/unicorn',
+		'example.biz.'
+	];
+
+	for (const x of fixtures) {
+		t.false(makeUrlRegex(
+			{exact: true, strict: false, tlds: ['com', 'ws', 'de', 'net', 'mp', 'bar']}
+		).test(x));
+	}
+});
+
+test('fail for makeUrlRegex if tlds flag not present, strict false', t => {
+	t.throws(() => {
+		makeUrlRegex({exact: true, strict: false}).test('http://google.com');
+	}, {message: /tlds/});
 });
