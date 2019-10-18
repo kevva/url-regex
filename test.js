@@ -327,11 +327,11 @@ test('fail if not in explicit list of TLDs', t => {
 	];
 
 	for (const x of fixtures) {
-		if (makeUrlRegex(
+		t.false(makeUrlRegex(
 			{exact: true, strict: false, tlds: ['com', 'ws', 'de', 'net', 'mp', 'bar']}
-		).test(x)) {
-			console.log(x);
-		}
+		).test(x));
+	}
+});
 
 		t.false(makeUrlRegex(
 			{exact: true, strict: false, tlds: ['com', 'ws', 'de', 'net', 'mp', 'bar']}
