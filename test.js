@@ -136,6 +136,15 @@ test('do not match URLs', t => {
 	}
 });
 
+test('do not match URLs with non-strict mode', t => {
+	const fixtures = [
+		'018137.113.215.4074.138.129.172220.179.206.94180.213.144.175250.45.147.1364868726sgdm6nohQ'
+	];
+	for (const x of fixtures) {
+		t.false(urlRegex({exact: true, strict: false}).test(x));
+	}
+});
+
 test('match using list of TLDs', t => {
 	const fixtures = [
 		'foo.com/blah_blah',
