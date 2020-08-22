@@ -26,7 +26,7 @@
 	],
 	"dependencies": {
 		"ip-regex": "^4.1.0",
-		"tlds": "^1.203.0"
+		"tlds": "^1.209.0"
 	},
 	"devDependencies": {
 		"ava": "^1.4.1",
