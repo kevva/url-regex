@@ -1,6 +1,7 @@
 'use strict';
 const ipRegex = require('ip-regex');
 const tlds = require('tlds');
+const RE2 = require('re2');
 
 module.exports = options => {
 	options = {
@@ -18,5 +19,5 @@ module.exports = options => {
 	const path = '(?:[/?#][^\\s"]*)?';
 	const regex = `(?:${protocol}|www\\.)${auth}(?:localhost|${ip}|${host}${domain}${tld})${port}${path}`;
 
-	return options.exact ? new RegExp(`(?:^${regex}$)`, 'i') : new RegExp(regex, 'ig');
+	return options.exact ? new RE2(`(?:^${regex}$)`, 'i') : new RE2(regex, 'ig');
 };
